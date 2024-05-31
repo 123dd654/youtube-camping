@@ -34,4 +34,48 @@
     .desc {
         padding: 0 10vw;
     }
+
+    .info {
+        margin-top: 30px;
+
+        span {
+            background-color: #a6a6a631;
+            padding: 10px 20px;
+            border-radius: 40px;
+            margin: 4px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                vertical-align: -5px;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.channel__video {
+    margin-top: 100px;
+    padding: 2rem 2rem 3rem 2rem;
+}
+
+.channel__more,
+.search__more {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    button {
+        padding: 10px 30px;
+        margin: 20px;
+        border-radius: 50px;
+        transition: all 0.3s;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+    }
 }
