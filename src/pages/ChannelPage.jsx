@@ -41,8 +41,9 @@ const ChannelPage = () => {
                 }
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         fetchResults();
-    }, [channelID, setLoading]); // setLoading을 종속성으로 추가
+    }, [channelID]);
 
     const loadMoreVideos = async () => {
         if (nextPageToken) {
