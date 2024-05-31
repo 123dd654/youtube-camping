@@ -20,13 +20,11 @@ const ChannelPage = () => {
                 const detail = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet,brandingSettings,statistics&id=${channelID}&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`);
                 const detaildata = await detail.json();
                 setChannelDetail(detaildata.items[0]);
-                console.log(detaildata);
 
                 const video = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelID}&order=date&maxResults=48&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`);
                 const videoData = await video.json();
                 setChannelVideo(videoData.items);
                 setNextPageToken(videoData.nextPageToken);
-                console.log(videoData);
             } catch (error) {
                 console.log('데이터를 가져오지 못했습니다', error);
             } finally {
@@ -42,9 +40,9 @@ const ChannelPage = () => {
                     setLoading(false);
                 }
             }
-        }
+        };
         fetchResults();
-    }, [channelID]);
+    }, [channelID, setLoading]); // setLoading을 종속성으로 추가
 
     const loadMoreVideos = async () => {
         if (nextPageToken) {
@@ -53,7 +51,7 @@ const ChannelPage = () => {
             setChannelVideo(prevVideos => [...prevVideos, ...nextVideoData.items]);
             setNextPageToken(nextVideoData.nextPageToken);
         }
-    }
+    };
 
     return (
         <Main
