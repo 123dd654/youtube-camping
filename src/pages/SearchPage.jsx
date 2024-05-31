@@ -45,7 +45,7 @@ const SearchPage = () => {
                 <Loading />
             ) : (
                 <section id='searchPage' className='fade-in'>
-                    <h2>:눈이_하트_모양인_얼굴:<em>{searchID}</em>를 검색한 결과입니다.</h2>
+                    <h2>🏔️<em>{searchID}</em>를 검색한 결과입니다.</h2>
                     <div className="video__inner">
                         <VideoView videos={videos} />
                     </div>
