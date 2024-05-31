@@ -4,8 +4,8 @@ import Main from '../components/section/Main'
 const Home = () => {
     return (
         <Main
-            title="캠핑유튜브"
-            description="캠핑 유튜브 소개채널입니다.">
+            title="힐링 캠핑 라이프"
+            description="자연 속에서의 힐링과 모험을 담은 캠핑 유튜브 채널입니다.">
             Home
         </Main>
     )
