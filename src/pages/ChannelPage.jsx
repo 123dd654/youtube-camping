@@ -10,7 +10,7 @@ const ChannelPage = () => {
     const { channelID } = useParams();
     const [channelDetail, setChannelDetail] = useState();
     const [channelVideo, setChannelVideo] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [setLoading] = useState(true);
     const [nextPageToken, setNextPageToken] = useState(null);
 
     useEffect(() => {
