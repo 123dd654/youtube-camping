@@ -3,14 +3,13 @@ import Main from '../components/section/Main'
 import { useParams } from 'react-router-dom';
 import { CiBadgeDollar, CiMedal, CiRead } from 'react-icons/ci';
 import VideoView from '../components/video/VideoView';
-
-
+import Loading from '../components/section/Loading';
 
 const ChannelPage = () => {
     const { channelID } = useParams();
     const [channelDetail, setChannelDetail] = useState();
     const [channelVideo, setChannelVideo] = useState([]);
-    const [setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [nextPageToken, setNextPageToken] = useState(null);
 
     useEffect(() => {
@@ -48,35 +47,58 @@ const ChannelPage = () => {
         <Main
             title="유튜버 채널"
             description="유튜버 채널 페이지입니다."
-        ><section id='channelPage'>
-                {channelDetail && (
-                    <div className='channel__inner'>
-                        <div className='channel__header' style={{ backgroundImage: `url(${channelDetail.brandingSettings.image.bannerExternalUrl})` }}>
-                            <div className='circle'>
-                                <img src={channelDetail.snippet.thumbnails.high.url} alt={channelDetail.snippet.title} />
+        >
+            {loading ? (
+                <Loading />
+            ) : (
+                <section id="channelPage">
+                    {channelDetail && (
+                        <div className="channel__inner">
+                            <div
+                                className="channel__header"
+                                style={{
+                                    backgroundImage: `url(${channelDetail.brandingSettings.image.bannerExternalUrl})`,
+                                }}
+                            >
+                                <div className="circle">
+                                    <img
+                                        src={channelDetail.snippet.thumbnails.high.url}
+                                        alt={channelDetail.snippet.title}
+                                    />
+                                </div>
+                            </div>
+                            <div className="channel__info">
+                                <h3 className="title">{channelDetail.snippet.title}</h3>
+                                <p className="desc">{channelDetail.snippet.description}</p>
+                                <div className="info">
+                                    <span>
+                                        <CiBadgeDollar />
+                                        {channelDetail.statistics.subscriberCount}
+                                    </span>
+                                    <span>
+                                        <CiMedal />
+                                        {channelDetail.statistics.videoCount}
+                                    </span>
+                                    <span>
+                                        <CiRead />
+                                        {channelDetail.statistics.viewCount}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="channel__video video__inner">
+                                <VideoView videos={channelVideo} />
+                            </div>
+                            <div className="channel__more">
+                                {nextPageToken && (
+                                    <button onClick={loadMoreVideos}>더보기</button>
+                                )}
                             </div>
                         </div>
-                        <div className='channel__info'>
-                            <h3 className='title'>{channelDetail.snippet.title}</h3>
-                            <p className='desc'>{channelDetail.snippet.description}</p>
-                            <div className='info'>
-                                <span><CiBadgeDollar />{channelDetail.statistics.subscriberCount}</span>
-                                <span><CiMedal />{channelDetail.statistics.videoCount}</span>
-                                <span><CiRead />{channelDetail.statistics.viewCount}</span>
-                            </div>
-                        </div>
-                        <div className="channel__video video__inner">
-                            <VideoView videos={channelVideo} />
-                        </div>
-                        <div className="channel__more">
-                            {nextPageToken && (
-                                <button onClick={loadMoreVideos}>더보기</button>
-                            )}
-                        </div>
-                    </div>
-                )}
-            </section>
+                    )}
+                </section>
+            )}
         </Main>
-    )
-}
-export default ChannelPage
+    );
+};
+
+export default ChannelPage;
