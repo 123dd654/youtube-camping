@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Main from '../components/section/Main'
+import React, { useEffect, useState } from 'react';
+import Main from '../components/section/Main';
 import { useParams } from 'react-router-dom';
 import { CiBadgeDollar, CiMedal, CiRead } from 'react-icons/ci';
 import VideoView from '../components/video/VideoView';
@@ -14,22 +14,33 @@ const ChannelPage = () => {
 
     useEffect(() => {
         const fetchResults = async () => {
+            setLoading(true);
+            const startTime = Date.now();
             try {
-                const detail = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet,brandingSettings,statistics&id=${channelID}&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`)
+                const detail = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet,brandingSettings,statistics&id=${channelID}&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`);
                 const detaildata = await detail.json();
                 setChannelDetail(detaildata.items[0]);
                 console.log(detaildata);
 
-                const video = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelID}&order=date&maxResults=48&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`)
+                const video = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelID}&order=date&maxResults=48&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`);
                 const videoData = await video.json();
                 setChannelVideo(videoData.items);
                 setNextPageToken(videoData.nextPageToken);
                 console.log(videoData);
-
             } catch (error) {
                 console.log('데이터를 가져오지 못했습니다', error);
             } finally {
-                setLoading(false);
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+                const minimumLoadingTime = 2000; // 최소 로딩 시간을 3초로 설정
+
+                if (duration < minimumLoadingTime) {
+                    setTimeout(() => {
+                        setLoading(false);
+                    }, minimumLoadingTime - duration);
+                } else {
+                    setLoading(false);
+                }
             }
         }
         fetchResults();
@@ -37,12 +48,13 @@ const ChannelPage = () => {
 
     const loadMoreVideos = async () => {
         if (nextPageToken) {
-            const nextVideo = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelID}&maxResults=48&order=date&pageToken=${nextPageToken}&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`)
+            const nextVideo = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelID}&maxResults=48&order=date&pageToken=${nextPageToken}&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`);
             const nextVideoData = await nextVideo.json();
             setChannelVideo(prevVideos => [...prevVideos, ...nextVideoData.items]);
             setNextPageToken(nextVideoData.nextPageToken);
         }
     }
+
     return (
         <Main
             title="유튜버 채널"
