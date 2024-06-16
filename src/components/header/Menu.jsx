@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { headerMenus, searchKeyword } from '../../data/menu';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const Menu = () => {
             <ul className='menu'>
                 {headerMenus.map((menu, key) => (
                     <li key={key}>
-                        <Link to={menu.src}>
+                        <Link to={menu.src} className="btn up">
                             {menu.icon}<span>{menu.title}</span>
                         </Link>
                     </li>
@@ -24,7 +24,7 @@ const Menu = () => {
                 ))}
             </ul>
         </nav>
-    )
-}
+    );
+};
 
-export default Menu
+export default Menu;

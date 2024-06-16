@@ -22,7 +22,7 @@ const Search = () => {
                 <input
                     type="search"
                     id='searchInput'
-                    placeholder='검색어를 입력해주세요!'
+                    placeholder='SEARCH'
                     autoComplete='off'
                     className='search__input'
                     onChange={e => setSearchKeyword(e.target.value)}

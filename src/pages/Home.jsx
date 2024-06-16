@@ -1,123 +1,111 @@
-import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import React, { useEffect } from 'react';
 import Main from '../components/section/Main';
-import VideoView from '../components/video/VideoView';
-import Loading from '../components/section/Loading';
+import '../assets/scss/section/_Home.scss';
 
 const Home = () => {
-    const [videos, setVideos] = useState({
-        camping: [],
-        dogCamping: [],
-        recommendedCamping: [],
-        campingGoods: [],
-        gyeonggiCamping: [],
-        gangwonCamping: [],
-        gyeongnamCamping: [],
-        gyeongbukCamping: []
-    });
-    const [loading, setLoading] = useState(true);
-
     useEffect(() => {
-        const fetchVideos = async (query, category) => {
-            try {
-                const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&q=${query}&key=${process.env.REACT_APP_YOUTUBE_API_KEY2}`);
-                const data = await response.json();
-                setVideos(prevVideos => ({
-                    ...prevVideos,
-                    [category]: data.items
-                }));
-            } catch (error) {
-                console.error(error);
+        const elems = document.querySelectorAll('.laya-please');
+        const layer2 = document.querySelector('.layer-2');
+        const layer3 = document.querySelector('.layer-3');
+        const layer4 = document.querySelector('.layer-4');
+        const layer5 = document.querySelector('.layer-5');
+        const layer6 = document.querySelector('.layer-6');
+        const layer7 = document.querySelector('.layer-7');
+        const layer8 = document.querySelector('.layer-8');
+
+        setTimeout(() => {
+            elems.forEach((elem) => {
+                if (elem) {
+                    elem.style.animation = 'none';
+                }
+            });
+        }, 1500);
+
+        const handleMouseMove = (e) => {
+            if (!e.currentTarget.dataset.triggered) {
+                elems.forEach((elem) => {
+                    if (elem && elem.getAttribute('style')) {
+                        elem.style.transition = 'all .5s';
+                        elem.style.transform = 'none';
+                    }
+                });
             }
+            e.currentTarget.dataset.triggered = true;
+
+            let width = window.innerWidth / 2;
+            let mouseMoved2 = (width - e.pageX) / 50;
+            let mouseMoved3 = (width - e.pageX) / 40;
+            let mouseMoved4 = (width - e.pageX) / 30;
+            let mouseMoved5 = (width - e.pageX) / 20;
+            let mouseMoved6 = (width - e.pageX) / 10;
+            let mouseMoved7 = (width - e.pageX) / 5;
+
+            if (layer3) layer3.style.transform = `translateX(${mouseMoved2}px)`;
+            if (layer4) layer4.style.transform = `translateX(${mouseMoved3}px)`;
+            if (layer5) layer5.style.transform = `translateX(${mouseMoved4}px)`;
+            if (layer6) layer6.style.transform = `translateX(${mouseMoved5}px)`;
+            if (layer7) layer7.style.transform = `translateX(${mouseMoved6}px)`;
+            if (layer8) layer8.style.transform = `translateX(${mouseMoved7}px)`;
         };
 
-        const fetchAllVideos = async () => {
-            setLoading(true);
-            await fetchVideos('캠핑', 'camping');
-            await fetchVideos('애견동반 캠핑장', 'dogCamping');
-            await fetchVideos('추천캠핑장', 'recommendedCamping');
-            await fetchVideos('캠핑용품', 'campingGoods');
-            await fetchVideos('경기도 캠핑장', 'gyeonggiCamping');
-            await fetchVideos('강원도 캠핑장', 'gangwonCamping');
-            await fetchVideos('경남 캠핑장', 'gyeongnamCamping');
-            await fetchVideos('경북캠핑장', 'gyeongbukCamping');
-            setLoading(false);
+        const handleMouseLeave = () => {
+            elems.forEach((elem) => {
+                if (elem) {
+                    elem.style.transition = 'all .5s';
+                    elem.style.transform = 'none';
+                }
+            });
         };
 
-        fetchAllVideos();
+        const handleMouseEnter = () => {
+            elems.forEach((elem) => {
+                if (elem) {
+                    setTimeout(() => {
+                        elem.style.transition = 'none';
+                    }, 500);
+                }
+            });
+        };
+
+        document.body.addEventListener('mousemove', handleMouseMove);
+        document.body.addEventListener('mouseleave', handleMouseLeave);
+        document.body.addEventListener('mouseenter', handleMouseEnter);
+
+        return () => {
+            document.body.removeEventListener('mousemove', handleMouseMove);
+            document.body.removeEventListener('mouseleave', handleMouseLeave);
+            document.body.removeEventListener('mouseenter', handleMouseEnter);
+        };
     }, []);
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-    };
 
     return (
         <Main
             title="힐링 캠핑 라이프"
             description="자연 속에서의 힐링과 모험을 담은 캠핑 유튜브 채널입니다."
         >
-            {loading ? (
-                <Loading />
-            ) : (
-                <>
-                    <section>
-                        <h2>캠핑영상</h2>
-                        <Slider {...settings}>
-                            {videos.camping.map(video => (
-                                <div key={video.id.videoId}>
-                                    <VideoView video={video} />
-                                </div>
-                            ))}
-                        </Slider>
-                    </section>
-                    <section>
-                        <h2>애견동반 캠핑장</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.dogCamping} />
-                        </div>
-                    </section>
-                    <section>
-                        <h2>추천캠핑장</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.recommendedCamping} />
-                        </div>
-                    </section>
-                    <section>
-                        <h2>캠핑용품</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.campingGoods} />
-                        </div>
-                    </section>
-                    <section>
-                        <h2>경기도 캠핑장</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.gyeonggiCamping} />
-                        </div>
-                    </section>
-                    <section>
-                        <h2>강원도 캠핑장</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.gangwonCamping} />
-                        </div>
-                    </section>
-                    <section>
-                        <h2>경남 캠핑장</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.gyeongnamCamping} />
-                        </div>
-                    </section>
-                    <section>
-                        <h2>경북캠핑장</h2>
-                        <div className="video__inner">
-                            <VideoView videos={videos.gyeongbukCamping} />
-                        </div>
-                    </section>
-                </>
-            )}
+            <section className="text-overlay">
+                <h2>Camping<br />
+                    Youtube Site</h2>
+                <p>자연과 함께하는 캠핑의 즐거움을 만끽하세요. <br />다양한 캠핑 관련 영상을 통해 더욱 풍성한 캠핑 라이프를 경험해보세요.</p>
+            </section>
+            <section className="totalcontainer">
+                <div className="laya-please layer-1"></div>
+                <div className="laya-please layer-2"></div>
+                <div className="container1">
+                    <div className="laya-please layer-3"></div>
+                    <div className="laya-please layer-4"></div>
+                    <div className="laya-please layer-5"></div>
+                    <div className="laya-please layer-6"></div>
+                </div>
+                <div className="container2">
+                    <div className="laya-please layer-7"></div>
+                    <div className="laya-please layer-8"></div>
+                </div>
+            </section>
+            <footer className="footer">
+                <p><a href="mailto:rhtnrck12@gmail.com">rhtnrck12@gmail.com</a></p>
+                <p>이 사이트는 포트폴리오 목적으로 제작되었으며, 상업적인 용도로 사용되지 않습니다. 메인 애니메이션은 코드펜(CodePen)에서 가져왔으며, 모든 저작권은 해당 창작자에게 있습니다.</p>
+            </footer>
         </Main>
     );
 };

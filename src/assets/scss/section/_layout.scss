@@ -11,10 +11,15 @@
 #main {
     max-width: 2000px;
     min-height: 100vh;
+    height: 1000px;
     margin: 0 auto;
     padding-left: 260px;
-    background-color: #111;
+    // background-color: #111;
     position: relative;
+    // background-image: url(../../img/main_img01.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
 }
 
