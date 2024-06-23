@@ -1,6 +1,6 @@
 캠핑 관련 YouTube 콘텐츠를 위한 웹사이트 개발을 위해 Node.js와 React를 활용하는 프로젝트의 간결한 가이드입니다:
 
-<img src="https://github.com/123dd654/travelrank/assets/161431124/b69c0e63-1900-4a9d-b80f-29edc466d848" alt="메인화면">
+<img src="https://github.com/123dd654/youtube-camping/assets/161431124/a9400ed2-9020-4963-b0e8-5f26e905e6fa" alt="메인화면">
 
 ## 개발 준비
 * Node.js 설치: 공식 웹사이트에서 다운로드 후, node -v로 버전 확인.
