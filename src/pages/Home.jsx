@@ -87,9 +87,10 @@ const Home = () => {
                 <h2>Camping<br />
                     Youtube Site</h2>
                 <p>자연과 함께하는 캠핑의 즐거움을 만끽하세요. <br />다양한 캠핑 관련 영상을 통해 더욱 풍성한 캠핑 라이프를 경험해보세요.</p>
+                <p>옆 카테고리를 보면 클릭이 가능한 태그들을 만들어 두었습니다.<br />원하시는 동영상이 있다면 상단에 서치도 가능합니다.</p>
             </section>
             <section className="totalcontainer">
-                <div className="laya-please layer-1"></div>
+                <div className="laya-please layer-1" style={{backgroundColor: '#000'}}></div>
                 <div className="laya-please layer-2"></div>
                 <div className="container1">
                     <div className="laya-please layer-3"></div>
@@ -102,10 +103,7 @@ const Home = () => {
                     <div className="laya-please layer-8"></div>
                 </div>
             </section>
-            <footer className="footer">
-                <p><a href="mailto:rhtnrck12@gmail.com">rhtnrck12@gmail.com</a></p>
-                <p>이 사이트는 포트폴리오 목적으로 제작되었으며, 상업적인 용도로 사용되지 않습니다. 메인 애니메이션은 코드펜(CodePen)에서 가져왔으며, 모든 저작권은 해당 창작자에게 있습니다.</p>
-            </footer>
+            
         </Main>
     );
 };

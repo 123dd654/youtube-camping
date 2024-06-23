@@ -7,7 +7,7 @@
         right: 0;
         bottom: 0;
         background-image: url(../../img/header_img.jpeg);
-        // filter: grayscale(100%);
+        filter: grayscale(100%);
         z-index: -1; /* Ensure the background image stays behind the content */
     }
 
@@ -78,38 +78,44 @@
                     color: #fff;
                     text-decoration: none; /* 필요한 경우 링크의 기본 밑줄 제거 */
                     display: block;
+                    border-radius: 20px;
+
+                    &:hover{
+                        background-color: #37956f;
+                        color: #fff;
+                    }
                     
                 
-                    &:after {
-                    position: absolute;
-                    content: "";
-                    width: 0;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    direction: rtl;
-                    z-index: -1;
-                    box-shadow:
-                    -7px -7px 20px 0px #fff9,
-                    -4px -4px 5px 0px #fff9,
-                    7px 7px 20px 0px #0002,
-                    4px 4px 5px 0px #0001;
-                    transition: all 0.3s ease;
-                    }
+                    // &:after {
+                    // position: absolute;
+                    // content: "";
+                    // width: 0;
+                    // height: 100%;
+                    // top: 0;
+                    // left: 0;
+                    // direction: rtl;
+                    // z-index: -1;
+                    // box-shadow:
+                    // -7px -7px 20px 0px #fff9,
+                    // -4px -4px 5px 0px #fff9,
+                    // 7px 7px 20px 0px #0002,
+                    // 4px 4px 5px 0px #0001;
+                    // transition: all 0.3s ease;
+                    // }
                 
-                    &:hover {
-                    color: #fff;
-                    }
+                    // &:hover {
+                    // color: #fff;
+                    // }
                 
-                    &:hover:after {
-                    left: auto;
-                    right: 0;
-                    width: 100%;
-                    }
+                    // &:hover:after {
+                    // left: auto;
+                    // right: 0;
+                    // width: 100%;
+                    // }
                 
-                    &:active {
-                    top: 2px;
-                    }
+                    // &:active {
+                    // top: 2px;
+                    // }
                 }
                 
             }
